@@ -32,3 +32,10 @@ function view($path, $attributes = []): void
     extract($attributes);
     require base_path("views/$path");
 }
+
+function abort($code = Response::NOT_FOUND)
+{
+    http_response_code($code);
+    view("$code.view.php");
+    die();
+}

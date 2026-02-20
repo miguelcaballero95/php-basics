@@ -39,3 +39,20 @@ function abort($code = Response::NOT_FOUND)
     view("$code.view.php");
     die();
 }
+
+function login($user)
+{
+    $_SESSION['user'] = [
+        'email' => $user['email']
+    ];
+
+    session_regenerate_id(true);
+}
+
+function logout()
+{
+    $_SESSION = [];
+    session_destroy();
+
+    setcookie(session_name(), '', time() - 3600);
+}
